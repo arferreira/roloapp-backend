@@ -9,6 +9,15 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div id="wrapper">
+      <%= yield %>
+      <!-- /#wrapper -->
+    </div>
+    <% if alert  %>
+    <script>
+      //$.notify("<%= alert %>", "error");
+      toastr.info('<%= alert %>')
+    </script>
+    <% end %>
   </body>
 </html>
