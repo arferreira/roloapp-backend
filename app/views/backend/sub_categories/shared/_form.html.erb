@@ -1,0 +1,55 @@
+<br/>
+<% if @subcategory.errors.any? %>
+<% @subcategory.errors.full_messages.each do |message| %>
+<script>
+  toastr.error('<%= message %>')
+</script>
+<% end %>
+<% end %>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= t('subcategory') %></h3>
+      </div>
+      <div class="panel-body">
+        <div class="col-lg-6">
+          <%= form_for([:backend, @subcategory]) do |f| %>
+          <div class="form-group">
+            <%= f.label :"Description" %><br/>
+            <%= f.text_field :description, :class => 'form-control', :placeholder => 'Ex.: Animal / Pet' %><br/>
+            <%= f.label :"Status" %>
+            <%= f.check_box :status %><br/><br/>
+            <%= f.label :"Category" %><br/>
+            <%= f.collection_select(:category_id, Category.all, :id, :description) %><br><br>
+            <%= f.submit t('buttons.save'), :class => 'btn btn-primary' %>
+            <%= link_to t('buttons.back'),   backend_sub_categories_path, :class => 'btn btn-warning'  %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-warning">
+      <div class="panel-heading">Sub Categories</div>
+      <div class="panel-body">
+        <% if @categories  %>
+        <ul class="nav nav-pills nav-stacked nav-pills-stacked-example">
+          <% @categories.each do |category| %>
+          <li role="presentation" class="active">
+            <p class="text-primary">
+              <a>{<%= category.description %>}</a>
+            </p>
+            <% category.sub_categories.each do |subcategory| %>
+            <p class="text-success">---<%= subcategory.description %></p>
+            <% end %>
+          </li>
+          <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170423044021) do
+ActiveRecord::Schema.define(version: 20170423194527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,4 +41,40 @@ ActiveRecord::Schema.define(version: 20170423044021) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "cities", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "capital"
+    t.integer  "state_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["state_id"], name: "index_cities_on_state_id", using: :btree
+  end
+
+  create_table "regions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.string   "name"
+    t.string   "acronym"
+    t.integer  "region_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["region_id"], name: "index_states_on_region_id", using: :btree
+  end
+
+  create_table "sub_categories", force: :cascade do |t|
+    t.string   "description"
+    t.boolean  "status"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["category_id"], name: "index_sub_categories_on_category_id", using: :btree
+  end
+
+  add_foreign_key "cities", "states"
+  add_foreign_key "states", "regions"
+  add_foreign_key "sub_categories", "categories"
 end

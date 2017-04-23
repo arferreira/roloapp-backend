@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  
   namespace :backend do
+    resources :sub_categories, except: [:show, :destroy]
     resources :categories, except: [:show, :destroy]
   end
 

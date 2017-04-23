@@ -47,6 +47,10 @@ gem 'kaminari'
 gem 'kaminari-i18n'
 # Gem Version Basic Gem for quick default inclusion of Kaminari theme compatible with Twitter Bootstrap 2.0 and Twitter Bootstrap 3.0
 gem 'bootstrap4-kaminari-views'
+# gem for generating ERD
+gem 'rails-erd'
+# Complete Ruby geocoding solution. http://www.rubygeocoder.com
+gem 'geocoder'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-toastr'
